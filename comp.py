@@ -46,7 +46,8 @@ def sigint_handler(sig, frame):
 
 argparser = argparse.ArgumentParser(prog="RecurVidComp", description="A python script that scans and compresses all video file of a directory with recursive searching")
 argparser.add_argument("--no-confirm", action="store_true", help="Disables confirmation for each convertion.\ndefault is false", required=False)
-argparser.add_argument("--ffmpeg-args",type=str, action="store", help = "any additional argument to pass to ffmpeg.")
+argparser.add_argument("--ffmpeg-args",type=str, action="store", help = "Any additional argument to pass to ffmpeg.")
+argparser.add_argument("--no-remove", action="store_false", help = "Disable removing the origianl video after compression.\ndefault is false")
 argparser.add_argument("path", action="store", help="The start path for searching and converting")
 args = argparser.parse_args()
 directory = args.path
@@ -54,6 +55,7 @@ directory = args.path
 # exit(-1)
 commands = str(args.ffmpeg_args)
 no_conf = args.no_confirm
+no_remove = args.no_remove
 # print(no_conf)
 # exit(-1)
 
@@ -94,7 +96,8 @@ for video in filesToCompress:
             
         if fres.returncode == 0:
             if os.path.isfile(compname) and round(get_len(compname)) == round(get_len(video)):
-                os.remove(video)
+                if not no_remove:
+                    os.remove(video)
                 numOfCompressed += 1
                 numOfUncompressed -= 1
                 cprint("Done processing", "green")
