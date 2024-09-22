@@ -13,7 +13,12 @@ Finally the script checks if there is a compressed with the same length as the o
 Note that if you terminate the script using SIGINT signal (by pressing ctrl+c for example), it will remove the video that was converting.
 
 ## Running the script
-To run the script for a path enter the following command:
+To run the script you need to clone the repo or copy the script.
+If you prefer to cloen it, run this:
+```bash
+> git clone https://github.com/GHOST-mHBr/FFmpeg-Wrapper && cd FFmpeg-Wrapper
+```
+After that, enter the following command:
 ```bash
 > python3 comp.py <PATH>
 ```
